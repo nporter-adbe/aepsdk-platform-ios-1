@@ -26,9 +26,19 @@ public class Edge: NSObject, Extension {
     public static var extensionVersion = Constants.EXTENSION_VERSION
     public var metadata: [String: String]?
     public var runtime: ExtensionRuntime
+    private let hitQueue: HitQueuing?
 
     public required init(runtime: ExtensionRuntime) {
         self.runtime = runtime
+        guard let dataQueue = ServiceProvider.shared.dataQueueService.getDataQueue(label: name) else {
+            Log.error(label: "\(name):\(#function)", "Failed to create Data Queue, Edge could not be initialized")
+            self.hitQueue = nil
+            super.init()
+            return
+        }
+        let hitProcessor = EdgeHitProcessor(networkService: networkService, networkResponseHandler: networkResponseHandler)
+        self.hitQueue = PersistentHitQueue(dataQueue: dataQueue, processor: hitProcessor)
+        self.hitQueue?.beginProcessing()
         super.init()
     }
 
@@ -117,13 +127,14 @@ public class Edge: NSObject, Extension {
                 Log.debug(label: LOG_TAG, "handleExperienceEventRequest - Failed to build the URL, dropping current event '\(event.id.uuidString)'.")
                 return
             }
+            
+            let edgeHit = EdgeHit(url: url, request: requestPayload, headers: requestHeaders)
+            guard let hitData = try? JSONEncoder().encode(edgeHit) else {
+                Log.debug(label: "\(LOG_TAG):\(#function)", "Dropping Identity hit, failed to encode EdgeHit")
+                return
+            }
 
-            let callback: ResponseCallback = NetworkResponseCallback(requestId: requestId, responseHandler: networkResponseHandler)
-            networkService.doRequest(url: url,
-                                     requestBody: requestPayload,
-                                     requestHeaders: requestHeaders,
-                                     responseCallback: callback,
-                                     retryTimes: Constants.Defaults.NETWORK_REQUEST_MAX_RETRIES)
+            hitQueue?.queue(entity: DataEntity(uniqueIdentifier: requestId, timestamp: Date(), data: hitData))
         }
     }
 
