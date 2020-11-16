@@ -200,7 +200,7 @@ class NetworkResponseHandler {
             }
         }
     }
-    
+
     /// Iterates over the provided `warningsArray` and dispatches a new warning event to the Event Hub.
     /// It also logs each warning json
     /// - Parameters:
