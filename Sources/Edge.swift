@@ -61,6 +61,12 @@ public class Edge: NSObject, Extension {
                                                      event: event)
 
             return configurationSharedState?.status == .set && identitySharedState?.status == .set
+        } else if event.type == EventType.genericIdentity && event.source == EventSource.requestReset {
+            let identitySharedState = getXDMSharedState(extensionName: EdgeConstants.SharedState.Identity.STATE_OWNER_NAME,
+                                                        event: event,
+                                                        barrier: true)
+            
+            return identitySharedState?.status == .set
         }
 
         return true
@@ -152,6 +158,19 @@ public class Edge: NSObject, Extension {
                 Log.debug(label: LOG_TAG, "Device has opted-out of tracking. Clearing the Edge queue.")
             }
         }
+    }
+    
+    /// Handles the Identities reset event
+    /// - Parameter event: identities reset event
+    func handleIdentitiesReset(_ event: Event) {        
+        let resetHit = EdgeResetHit(shouldReset: true)
+        guard let resetHitData = try? JSONEncoder().encode(resetHit) else {
+            Log.debug(label: LOG_TAG, "Failed to encode Edge reset hit.")
+            return
+        }
+        
+        let entity = DataEntity(uniqueIdentifier: event.id.uuidString, timestamp: event.timestamp, data: resetHitData)
+        hitQueue?.queue(entity: entity)
     }
 
     /// Current privacy status set based on configuration update events

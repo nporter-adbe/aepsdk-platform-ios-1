@@ -24,6 +24,7 @@
 		1CB57B262460F2B6000B2DA5 /* EdgeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CB57B242460EF0C000B2DA5 /* EdgeTests.swift */; };
 		1CCD27D82459EEB900E912B2 /* XDMFormattersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCD27C72458CB8000E912B2 /* XDMFormattersTests.swift */; };
 		1CCD27DC245A240F00E912B2 /* ExperienceEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CCD27C82458CB8000E912B2 /* ExperienceEventTests.swift */; };
+		212B91C0260270C7002D7888 /* EdgeResetHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 212B91BF260270C7002D7888 /* EdgeResetHit.swift */; };
 		216989652554B39900B2752C /* EdgeHit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216989642554B39900B2752C /* EdgeHit.swift */; };
 		216989782554B61500B2752C /* EdgeHitProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216989772554B61500B2752C /* EdgeHitProcessor.swift */; };
 		216989B32555376A00B2752C /* EdgeHitProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 216989B22555376A00B2752C /* EdgeHitProcessorTests.swift */; };
@@ -246,6 +247,7 @@
 		1CCD27CE24592B2800E912B2 /* XDMFormatters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XDMFormatters.swift; sourceTree = "<group>"; };
 		1CCD27CF24592B2800E912B2 /* XDMProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XDMProtocols.swift; sourceTree = "<group>"; };
 		1ED3CB89A749953625CC5616 /* Pods-AEPCommerceDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AEPCommerceDemoApp.release.xcconfig"; path = "Target Support Files/Pods-AEPCommerceDemoApp/Pods-AEPCommerceDemoApp.release.xcconfig"; sourceTree = "<group>"; };
+		212B91BF260270C7002D7888 /* EdgeResetHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeResetHit.swift; sourceTree = "<group>"; };
 		216989642554B39900B2752C /* EdgeHit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeHit.swift; sourceTree = "<group>"; };
 		216989772554B61500B2752C /* EdgeHitProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeHitProcessor.swift; sourceTree = "<group>"; };
 		216989B22555376A00B2752C /* EdgeHitProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeHitProcessorTests.swift; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 			isa = PBXGroup;
 			children = (
 				216989642554B39900B2752C /* EdgeHit.swift */,
+				212B91BF260270C7002D7888 /* EdgeResetHit.swift */,
 				216989772554B61500B2752C /* EdgeHitProcessor.swift */,
 				D4D5D7D42477397700CC317E /* EdgeEventEncodable.swift */,
 				D46553FA246B6FBC00A150E2 /* EdgeEventError.swift */,
@@ -1357,6 +1360,7 @@
 				21D7B7B22562F89C0010AE25 /* EdgeEventWarning.swift in Sources */,
 				D4C6B44A251A76CB0038F4F9 /* StateMetadata.swift in Sources */,
 				D4C6B44B251A76CB0038F4F9 /* StoreResponsePayload.swift in Sources */,
+				212B91C0260270C7002D7888 /* EdgeResetHit.swift in Sources */,
 				D4C6B44C251A76CB0038F4F9 /* StoreResponsePayloadManager.swift in Sources */,
 				D4C6B44D251A76CB0038F4F9 /* EdgeConstants.swift in Sources */,
 				D4C6B44E251A76CB0038F4F9 /* Edge.swift in Sources */,

@@ -34,6 +34,14 @@ class EdgeHitProcessor: HitProcessing {
     }
 
     func processHit(entity: DataEntity, completion: @escaping (Bool) -> Void) {
+        if let data = entity.data, let _ = try? JSONDecoder().decode(EdgeResetHit.self, from: data) {
+            let storeResponsePayloadManager = StoreResponsePayloadManager(EdgeConstants.DataStoreKeys.STORE_NAME)
+            storeResponsePayloadManager.deleteAllStorePayloads()
+            Log.debug(label: LOG_TAG, "Device has reset identities. Clearing the Edge store payloads.")
+            completion(true)
+            return
+        }
+        
         guard let data = entity.data, let edgeHit = try? JSONDecoder().decode(EdgeHit.self, from: data) else {
             Log.debug(label: LOG_TAG, "Failed to decode Edge hit from DataEntity. Dropping entity with id \(entity.uniqueIdentifier).")
             completion(true)
