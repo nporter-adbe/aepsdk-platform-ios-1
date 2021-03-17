@@ -14,7 +14,7 @@ import AEPCore
 import Foundation
 
 /// Struct which represents an Edge hit
-struct EdgeHit {
+struct EdgeHit: Codable {
     /// The Edge configuration identifier
     let configId: String
 
@@ -23,4 +23,10 @@ struct EdgeHit {
 
     /// The `EdgeRequest` for the corresponding hit
     let request: EdgeRequest
+
+    // List of `Event`s for this hit
+    let listOfEvents: [Event]
+
+    /// The request headers
+    let headers: [String: String]
 }
